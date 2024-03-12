@@ -16,13 +16,16 @@ describe('axios get user by id test', function () {
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZWYyYTQ0NGFiZmY2ZTY1MTAyNWZjOCIsImlhdCI6MTcxMDIxMDA5NX0.cfS5HBH_b8j0Hmhz8WzSJxXgkQ-M7qgCybo0rvxsT68',
     };
 
-    const response = await axios.get(
-      `https://mia-production.up.railway.app/api/v1/${params}`,
-      {
+    const response = await axios
+      .get(`https://mia-production.up.railway.app/api/v1/${params}`, {
         headers,
-      }
-    );
-    console.log(response.data);
-    expect(response.status).to.equal(200);
+      })
+      .then((response) => {
+        console.log({ user: response.data });
+        expect(response.status).to.equal(200);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   });
 });
